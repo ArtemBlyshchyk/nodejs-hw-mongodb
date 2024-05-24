@@ -7,7 +7,6 @@ import { env } from './utils/env.js';
 
 //Setting a port using an environment variable
 const PORT = Number(env('PORT', '3000'));
-console.log(PORT);
 
 //Function for configuring the server
 export const setupServer = () => {
