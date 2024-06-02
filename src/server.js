@@ -6,6 +6,10 @@ import contactsRouter from './routes/contacts.js'; // import routers
 
 import { env } from './utils/env.js';
 
+//Import of middlewares
+import { errorHandler } from './middlewares/errorHandler.js';
+import { notFoundHandler } from './middlewares/notFoundHandler.js';
+
 //Setting a port using an environment variable
 const PORT = Number(env('PORT', '3000'));
 
@@ -32,19 +36,10 @@ export const setupServer = () => {
   app.use(contactsRouter);
 
   // Handling invalid routes
-  app.use('*', (req, res, next) => {
-    res.status(404).json({
-      message: 'Not found',
-    });
-  });
+  app.use('*', notFoundHandler);
 
   //Handling error during the get query
-  app.use((err, req, res, next) => {
-    res.status(500).json({
-      message: 'Something went wrong',
-      error: err.message,
-    });
-  });
+  app.use(errorHandler);
 
   // Starting the server
   app.listen(PORT, () => {
