@@ -3,6 +3,7 @@ import {
   getContactsController,
   getContactByIdController,
   createContactController,
+  patchContactController,
 } from '../controllers/contacts.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
@@ -16,5 +17,8 @@ router.get('/contacts/:contactId', ctrlWrapper(getContactByIdController));
 
 // Route for create a contact
 router.post('/contacts', ctrlWrapper(createContactController));
+
+// Route for partialy update (PATCH) a contact
+router.patch('/contacts/:contactId', ctrlWrapper(patchContactController));
 
 export default router;
