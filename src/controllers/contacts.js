@@ -5,7 +5,7 @@ import {
   deleteContact,
   getAllContacts,
   getContactById,
-  updateStudent,
+  updateContact,
 } from '../services/contacts.js';
 
 //Get all contacts CONTROLLER
@@ -51,7 +51,7 @@ export const createContactController = async (req, res) => {
 export const patchContactController = async (req, res, next) => {
   const { contactId } = req.params;
 
-  const result = await updateStudent(contactId, req.body);
+  const result = await updateContact(contactId, req.body);
 
   if (!result) {
     next(createHttpError(404, 'Contact not found'));
