@@ -2,7 +2,10 @@ import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
 
-import contactsRouter from './routes/contacts.js'; // import routers
+// import contactsRouter from './routes/contacts.js'; // import routers // During authentication we do not need this import
+
+//instead of import contactsRouter we should import:
+import router from './routes/index.js';
 
 import { env } from './utils/env.js';
 
@@ -32,8 +35,11 @@ export const setupServer = () => {
     }),
   );
 
-  //Route to get all contacts and get a contact by ID
-  app.use(contactsRouter);
+  //Route to get all contacts and get a contact by ID //During authentication we don't need this code
+  // app.use(contactsRouter);
+
+  //instead of it we should use
+  app.use(router);
 
   // Handling invalid routes
   app.use('*', notFoundHandler);
