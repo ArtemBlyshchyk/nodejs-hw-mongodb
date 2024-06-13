@@ -5,7 +5,7 @@ import cors from 'cors';
 // import contactsRouter from './routes/contacts.js'; // import routers // During authentication we do not need this import
 
 //instead of import contactsRouter we should import:
-import router from './routes/index.js';
+import router from './routers/index.js';
 
 import { env } from './utils/env.js';
 
