@@ -12,6 +12,7 @@ import { env } from './utils/env.js';
 //Import of middlewares
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
+import cookieParser from 'cookie-parser';
 
 //Setting a port using an environment variable
 const PORT = Number(env('PORT', '3000'));
@@ -46,6 +47,9 @@ export const setupServer = () => {
 
   //Handling error during the get query
   app.use(errorHandler);
+
+  //cookie
+  app.use(cookieParser());
 
   // Starting the server
   app.listen(PORT, () => {
