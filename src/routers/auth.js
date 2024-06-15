@@ -13,23 +13,23 @@ import { authenticate } from '../middlewares/authenticate.js';
 const router = Router();
 
 router.post(
-  '/auth/register',
+  '/register',
   validateBody(registerUserSchema),
   ctrlWrapper(registerUserController),
 );
 
 router.post(
-  '/auth/login',
+  '/login',
   validateBody(loginUserSchema),
   ctrlWrapper(loginUserController),
 );
 
 router.post(
-  '/auth/refresh',
+  '/refresh',
   authenticate,
   ctrlWrapper(refreshUserSessionController),
 );
 
-router.post('/auth/logout', authenticate, ctrlWrapper(logoutUserController));
+router.post('/logout', authenticate, ctrlWrapper(logoutUserController));
 
 export default router;
