@@ -47,7 +47,7 @@ export const getAllContacts = async ({
   const paginationData = calculatePaginationData(contactsCount, perPage, page);
 
   return {
-    data: contacts,
+    contacts,
     ...paginationData, //Used the spread operator to get all properties from the object paginationData;
   };
 };
