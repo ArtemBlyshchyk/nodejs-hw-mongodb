@@ -27,6 +27,9 @@ export const setupServer = () => {
   // Middleware for handling CORS requests
   app.use(cors());
 
+  //cookie
+  app.use(cookieParser());
+
   // Logging with pino
   app.use(
     pino({
@@ -47,9 +50,6 @@ export const setupServer = () => {
 
   //Handling error during the get query
   app.use(errorHandler);
-
-  //cookie
-  app.use(cookieParser());
 
   // Starting the server
   app.listen(PORT, () => {
