@@ -22,3 +22,16 @@ export const JWT_SECRET = 'JWT_SECRET';
 export const APP_DOMAIN = 'APP_DOMAIN';
 
 export const TEMPLATES_DIR = path.join(process.cwd(), 'src', 'templates');
+
+//multers
+export const TEMP_UPLOAD_DIR = path.join(process.cwd(), 'temp');
+export const UPLOAD_DIR = path.join(process.cwd(), 'uploads');
+
+//CLOUDINARY
+export const CLOUDINARY = {
+  CLOUD_NAME: 'CLOUD_NAME',
+  API_KEY: 'API_KEY',
+  API_SECRET: 'API_SECRET',
+};
+
+export const ENABLE_CLOUDINARY = 'ENABLE_CLOUDINARY';

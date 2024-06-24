@@ -13,6 +13,7 @@ import { env } from './utils/env.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import cookieParser from 'cookie-parser';
+import { UPLOAD_DIR } from './constants/index.js';
 
 //Setting a port using an environment variable
 const PORT = Number(env('PORT', '3000'));
@@ -29,6 +30,9 @@ export const setupServer = () => {
 
   //cookie
   app.use(cookieParser());
+
+  //upload photos
+  app.use('/uploads', express.static(UPLOAD_DIR));
 
   // Logging with pino
   app.use(
