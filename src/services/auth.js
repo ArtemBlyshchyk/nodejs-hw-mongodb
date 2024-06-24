@@ -1,6 +1,6 @@
 import { randomBytes } from 'crypto';
 import bcrypt from 'bcrypt';
-import { UsersCollecttion } from '../db/models/users.js';
+import { UsersCollection } from '../db/models/users.js';
 import createHttpError from 'http-errors';
 import { SessionsCollection } from '../db/models/session.js';
 import {
@@ -18,7 +18,7 @@ import fs from 'node:fs/promises';
 
 export const registerUser = async (payload) => {
   //Checking the unique user email
-  const user = await UsersCollecttion.findOne({
+  const user = await UsersCollection.findOne({
     email: payload.email,
   });
 
@@ -26,14 +26,14 @@ export const registerUser = async (payload) => {
 
   const encryptedPassword = await bcrypt.hash(payload.password, 10);
 
-  return await UsersCollecttion.create({
+  return await UsersCollection.create({
     ...payload,
     password: encryptedPassword,
   });
 };
 
 export const loginUser = async (payload) => {
-  const user = await UsersCollecttion.findOne({
+  const user = await UsersCollection.findOne({
     email: payload.email,
   });
 
@@ -109,7 +109,7 @@ export const logoutUser = async (sessionId) => {
 
 //Request reset token to email
 export const requestResetToken = async (email) => {
-  const user = await UsersCollecttion.findOne({ email });
+  const user = await UsersCollection.findOne({ email });
   if (!user) {
     throw createHttpError(404, 'User not found');
   }
@@ -153,4 +153,33 @@ export const requestResetToken = async (email) => {
       'Failed to send the email, please try again later.',
     );
   }
+};
+
+// Reset password from email
+export const resetPassword = async (payload) => {
+  let entries;
+
+  try {
+    entries = jwt.verify(payload.token, env('JWT_SECRET'));
+  } catch (err) {
+    if (err instanceof Error)
+      throw createHttpError(401, 'Token is expired or invalid.');
+    throw err;
+  }
+
+  const user = await UsersCollection.findOne({
+    email: entries.email,
+    _id: entries.sub,
+  });
+
+  if (!user) {
+    throw createHttpError(404, 'User not found');
+  }
+
+  const encryptedPassword = await bcrypt.hash(payload.password, 10);
+
+  await UsersCollection.updateOne(
+    { _id: user._id },
+    { password: encryptedPassword },
+  );
 };
