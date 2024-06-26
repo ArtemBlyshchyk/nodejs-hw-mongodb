@@ -62,6 +62,12 @@ export const getContactByIdController = async (req, res, next) => {
 export const createContactController = async (req, res) => {
   const data = { ...req.body, userId: req.user._id };
 
+  //Added photo to the contact
+  const photo = req.file;
+  if (photo) {
+    data.photo = await saveFileToCloudinary(photo);
+  }
+
   const contact = await createContact(data);
 
   res.status(201).json({
@@ -75,6 +81,8 @@ export const createContactController = async (req, res) => {
 export const patchContactController = async (req, res, next) => {
   const { contactId } = req.params;
 
+  const userId = req.user._id;
+
   const photo = req.file;
 
   let photoUrl;
@@ -87,8 +95,7 @@ export const patchContactController = async (req, res, next) => {
     }
   }
 
-  // const userId = req.user._id;
-  const result = await updateContact(contactId, {
+  const result = await updateContact(contactId, userId, {
     ...req.body,
     photo: photoUrl,
   });
