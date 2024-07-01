@@ -8,12 +8,16 @@ info:
   description: >
     This is documentation of contacts app
 tags:
-  # теги, що ви будете використовувати
+  - name: Contacts
+    description: Operations about contacts.
+  - name: Auth
+    description: Auth operations.
 servers:
   - url: <http://localhost:3000>
   - url: #посилання на задеплоєний сайт
 paths:
-  # тут будуть посилання на ендпоінти
+  /contacts/{id}:
+    $ref: ../swagger/paths/contacts/{id}/get.yaml
 components:
   securitySchemes:
     bearerAuth:
