@@ -28,14 +28,6 @@ requestBody:
             description: "User's password"
             type: string
             example: scvsf234kb
-          createdAt:
-            description: 'The date the user was created'
-            type: string
-            example: '2024-07-02T12:24:51.663Z'
-          updatedAt:
-            description: 'The date the user was updated'
-            type: string
-            example: '2024-07-02T12:24:51.663Z'
 responses:
   '201':
     description: Registered a new user
