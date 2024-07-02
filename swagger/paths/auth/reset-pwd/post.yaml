@@ -25,7 +25,7 @@ requestBody:
             example: scvsf234kb
 responses:
   '200':
-    description: Rreset of a password
+    description: Reset of a password
     content:
       application/json:
         schema:
