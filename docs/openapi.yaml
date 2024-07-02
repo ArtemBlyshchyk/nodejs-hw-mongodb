@@ -40,6 +40,9 @@ paths:
   /auth/logout:
     post:
       $ref: ../swagger/paths/auth/logout/post.yaml
+  /auth/send-reset-email:
+    post:
+      $ref: ../swagger/paths/auth/reset-email/post.yaml
 components:
   securitySchemes:
     bearerAuth:

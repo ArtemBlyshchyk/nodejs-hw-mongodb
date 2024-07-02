@@ -25,6 +25,12 @@ responses:
               example: Successfully refreshed a user's session!
             data:
               type: object
-              $ref: '../../../components/schemas/auth.yaml'
+              required:
+                - accessToken
+              properties:
+                accessToken:
+                  type: string
+                  example: '35Ws0U02Uih54pGhMKudDrbxtV43oFARsS9XFVh+'
+
   '404':
     $ref: '../../../components/responses/404.yaml'
